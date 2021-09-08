@@ -1,0 +1,82 @@
+%YAML 1.2
+---
+# See http://www.sublimetext.com/docs/3/syntax.html
+file_extensions:
+  - liggghts
+scope: source.liggghts
+
+contexts:
+  # The prototype context is prepended to all contexts but those setting
+  # meta_include_prototype: false.
+  prototype:
+    - include: comments
+
+  main:
+    # The main context is the initial starting point of our syntax.
+    # Include other contexts from here (or specify them directly).
+    - include: commands
+    - include: keywords
+    - include: numbers
+    - include: numerics
+    - include: mathoperations
+    - include: variables
+
+  commands:
+    # Commands are words that start a new line and introduce the modification.
+    - match: '\b(if|else|for|while|variable|print|label|shell|next|jump|units|atom_style|atom_modify|boundary|newton|communicate|region|create_box|neighbor|neigh_modify|fix|unfix|pair_style|pair_coeff|dump|undump|timestep|thermo_style|thermo|thermo_modify|run|delete_atoms|clear|write_data|hard_particles|compute|restart|log|fix_modify)\b'
+      scope: keyword.control.liggghts
+
+  keywords:
+    # Keywords specify the type of command.
+    - match: '\b(property/global|ke/atom|pe/atom|pair/gran/local|stress/atom|displace/atom|contact/atom|servo/integrate|nve/sphere|particletemplate/sphere|particledistribution/discrete|insert/rate/region|mesh/surface/stress/servo|mesh/surface|ave/time|wall/gran|check/timestep/gran|custom/vtk|mesh/gran/VTK|servo/target_val|servo/vel_max|local|custom|hertz|gravity|equal|index|string|then)\b'
+      scope: entity.name.class.liggghts
+      
+  numbers:
+    - match: '\b[0-9.]+e[0-9.]+\b'
+      scope: constant.numeric.liggghts
+    - match: '\b[0-9.]+e-[0-9.]+\b'
+      scope: constant.numeric.liggghts
+    - match: '\b(-)?[0-9.]+\b'
+      scope: constant.numeric.liggghts
+
+  numerics:
+    - match: '\${'
+      scope: constant.numeric.liggghts
+      push: numerics_end
+    - match: '\$\w'
+      scope: constant.numeric.liggghts
+
+  numerics_end:
+    - meta_scope: string.quoted.double.liggghts
+    - match: '}'
+      scope: constant.character.escape.liggghts
+      pop: true
+
+  variables:
+    - match: '(v_|c_|f_)'
+      scope: constant.numeric.liggghts
+      push: variables_end
+
+  variables_end:
+    - meta_scope: constant.numeric.liggghts
+    - match: '\w(?=\W)'
+      scope: constant.numeric.escape.liggghts
+      pop: true
+
+  mathoperations:
+    - meta_scope: constant.numeric.liggghts
+    - match: '\$\('
+      scope: constant.numeric.escape.liggghts
+    - match: '\)((?=\s)|(?=#)|(?=\"))'
+      scope: constant.numeric.escape.liggghts
+
+
+  comments:
+    # Comments begin with a '#' and finish at the end of the line.
+    - match: '#'
+      scope: punctuation.definition.comment.liggghts
+      push:
+        # This is an anonymous context push for brevity.
+        - meta_scope: comment.line.double-slash.liggghts
+        - match: $\n?
+          pop: true

@@ -23,15 +23,18 @@ contexts:
 
   commands:
     # Commands are words that start a new line and introduce the modification.
-    - match: '\b(if|else|for|while|variable|print|label|shell|next|jump|units|atom_style|atom_modify|boundary|newton|communicate|region|create_box|neighbor|neigh_modify|fix|unfix|pair_style|pair_coeff|dump|undump|timestep|thermo_style|thermo|thermo_modify|run|delete_atoms|clear|write_data|hard_particles|compute|restart|log|fix_modify)\b'
+    - match: '\b(if|else|for|while|variable|print|label|shell|next|jump|units|atom_style|atom_modify|boundary|newton|communicate|region|create_box|neighbor|neigh_modify|fix|unfix|pair_style|pair_coeff|dump|undump|timestep|thermo_style|thermo|thermo_modify|run|delete_atoms|clear|write_data|hard_particles|compute|restart|log|fix_modify|read_data)\b'
       scope: keyword.control.liggghts
 
   keywords:
-    # Keywords specify the type of command.
+    # Keywords modify the type of command given.
     - match: '\b(property/global|ke/atom|pe/atom|pair/gran/local|stress/atom|displace/atom|contact/atom|servo/integrate|nve/sphere|particletemplate/sphere|particledistribution/discrete|insert/rate/region|mesh/surface/stress/servo|mesh/surface|ave/time|wall/gran|check/timestep/gran|custom/vtk|mesh/gran/VTK|servo/target_val|servo/vel_max|local|custom|hertz|gravity|equal|index|string|then)\b'
       scope: entity.name.class.liggghts
-      
+    - match: '&'
+      scope: entity.name.class.liggghts
+
   numbers:
+    #Numbers and exponential notation.
     - match: '\b[0-9.]+e[0-9.]+\b'
       scope: constant.numeric.liggghts
     - match: '\b[0-9.]+e-[0-9.]+\b'
@@ -40,6 +43,7 @@ contexts:
       scope: constant.numeric.liggghts
 
   numerics:
+    #Identify LIGGGHTS numeric variables
     - match: '\${'
       scope: constant.numeric.liggghts
       push: numerics_end
@@ -47,27 +51,32 @@ contexts:
       scope: constant.numeric.liggghts
 
   numerics_end:
+    #Finish identifing LIGGGHTS numeric variables
     - meta_scope: string.quoted.double.liggghts
     - match: '}'
       scope: constant.character.escape.liggghts
       pop: true
 
   variables:
+    #Identify LIGGGHTS numeric variables type 2
     - match: '(v_|c_|f_)'
       scope: constant.numeric.liggghts
       push: variables_end
 
   variables_end:
+    #Finish identifing LIGGGHTS numeric variables type 2
     - meta_scope: constant.numeric.liggghts
     - match: '\w(?=\W)'
       scope: constant.numeric.escape.liggghts
       pop: true
 
   mathoperations:
+    #Identify math parenthesis and color the correct one.
     - meta_scope: constant.numeric.liggghts
     - match: '\$\('
       scope: constant.numeric.escape.liggghts
-    - match: '\)((?=\s)|(?=#)|(?=\"))'
+    #- match: '\)((?=\s)|(?=#)|(?=\"))' dont work all cases '' mainly.
+    - match: '\)((?!\w)(?!\))(?!\*))'
       scope: constant.numeric.escape.liggghts
 
 

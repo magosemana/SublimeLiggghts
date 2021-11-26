@@ -54,7 +54,7 @@ contexts:
     #Finish identifing LIGGGHTS numeric variables
     - meta_scope: string.quoted.double.liggghts
     - match: '}'
-      scope: constant.character.escape.liggghts
+      scope: constant.numeric.liggghts
       pop: true
 
   variables:

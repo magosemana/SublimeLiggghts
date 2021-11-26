@@ -76,7 +76,7 @@ contexts:
     - match: '\$\('
       scope: constant.numeric.escape.liggghts
     #- match: '\)((?=\s)|(?=#)|(?=\"))' dont work all cases '' mainly.
-    - match: '\)((?!\w)(?!\))(?!\*))'
+    - match: '\)((?!\w)(?!\))(?!\*))(?!\/)'
       scope: constant.numeric.escape.liggghts
 
 

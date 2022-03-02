@@ -29,7 +29,7 @@ contexts:
 
   keywords:
     # Keywords modify the type of command given.
-    - match: '\b(property/global|ke/atom|pe/atom|pair/gran/local|wall/gran/local|stress/atom|displace/atom|contact/atom|servo/integrate|nve/sphere|particletemplate/sphere|particledistribution/discrete|insert/rate/region|mesh/surface/stress/servo|mesh/surface/stress|mesh/surface|ave/time|wall/gran|check/timestep/gran|custom/vtk|mesh/gran/VTK|servo/target_val|servo/vel_max|local|custom|hertz|gravity|equal|index|string|then|move/mesh)\b'
+    - match: '\b(property/global|ke/atom|pe/atom|pair/gran/local|wall/gran/local|stress/atom|displace/atom|contact/atom|servo/integrate|nve/sphere|particletemplate/sphere|particledistribution/discrete|insert/rate/region|mesh/surface/stress/servo|mesh/surface/stress|local/gran/vtk|mesh/surface|ave/time|wall/gran|check/timestep/gran|custom/vtk|mesh/gran/VTK|servo/target_val|servo/vel_max|local|custom|hertz|gravity|equal|index|string|then|move/mesh)\b'
       scope: entity.name.class.liggghts
     - match: '&'
       scope: entity.name.class.liggghts

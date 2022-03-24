@@ -24,12 +24,12 @@ contexts:
 
   commands:
     # Commands are words that start a new line and introduce the modification.
-    - match: '\b(if|elif|else|for|while|variable|print|label|shell|next|jump|units|atom_style|atom_modify|boundary|newton|communicate|region|create_box|neighbor|neigh_modify|fix|unfix|pair_style|pair_coeff|dump|undump|timestep|thermo_style|thermo|thermo_modify|run|delete_atoms|clear|write_data|hard_particles|compute|restart|log|fix_modify|read_data|write_restart)\b'
+    - match: '\b(if|elif|else|for|while|variable|print|label|shell|next|jump|units|atom_style|atom_modify|boundary|newton|communicate|region|create_box|neighbor|neigh_modify|fix|unfix|pair_style|pair_coeff|dump|undump|timestep|thermo_style|thermo|thermo_modify|run|delete_atoms|clear|write_data|hard_particles|compute|uncompute|restart|log|fix_modify|read_data|write_restart|reset_timestep)\b'
       scope: keyword.control.liggghts
 
   keywords:
     # Keywords modify the type of command given.
-    - match: '\b(property/global|ke/atom|pe/atom|pair/gran/local|wall/gran/local|stress/atom|displace/atom|contact/atom|servo/integrate|nve/sphere|particletemplate/sphere|particledistribution/discrete|insert/rate/region|mesh/surface/stress/servo|mesh/surface/stress|local/gran/vtk|mesh/surface|ave/time|wall/gran|check/timestep/gran|custom/vtk|mesh/gran/VTK|servo/target_val|servo/vel_max|local|custom|hertz|gravity|equal|index|string|then|move/mesh)\b'
+    - match: '\b(property/global|ke/atom|pe/atom|pair/gran/local|wall/gran/local|stress/atom|displace/atom|contact/atom|servo/integrate|nve/sphere|particletemplate/sphere|particledistribution/discrete|insert/rate/region|mesh/surface/stress/servo|mesh/surface/stress|local/gran/vtk|mesh/surface|ave/time|wall/gran|check/timestep/gran|custom/vtk|mesh/gran/VTK|servo/target_val|servo/vel_max|local|custom|hertz|gravity|equal|index|string|then|move/mesh|pre|post|every)\b'
       scope: entity.name.class.liggghts
     - match: '&'
       scope: entity.name.class.liggghts
